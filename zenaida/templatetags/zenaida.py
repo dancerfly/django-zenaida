@@ -51,7 +51,13 @@ def td_timeuntil(value, now=None):
     if not now:
         now = datetime.datetime.now(pytz.utc)
 
-    return value - now
+    try:
+        td = value - now
+    except TypeError:
+        now = datetime.date.today()
+        td = value - now
+
+    return td
 
 
 @register.assignment_tag
