@@ -6,7 +6,7 @@
 				{% block checkbox %}
 					<div class="checkbox">
 						<label for="{{ field|id }}">
-							{% formfield field %} {{ label }} {% if field.field.required %} <span class="required">*</span>{% endif %}
+							{% if using %}{% formfield field using using %}{% else %}{% formfield field %}{% endif %} {{ label }} {% if field.field.required %} <span class="required">*</span>{% endif %}
 						</label>
 					</div>
 				{% endblock %}
@@ -18,7 +18,25 @@
 					{% if field|id %}</label>{% endif %}
 				{% endblock %}
 				{% block widget %}
-					{% if not is_checkbox %}{% formfield field %}{% endif %}
+					{% if not is_checkbox %}
+						{% if append or prepend %}
+							<div class='input-group'>
+								{% if prepend %}
+									<div class='input-group-addon'>
+										{{ prepend }}
+									</div>
+								{% endif %}
+						{% endif %}
+						{% if using %}{% formfield field using using %}{% else %}{% formfield field %}{% endif %}
+						{% if append or prepend %}
+								{% if append %}
+									<div class='input-group-addon'>
+										{{ append }}
+									</div>
+								{% endif %}
+							</div>
+						{% endif %}
+					{% endif %}
 				{% endblock %}
 			{% endif %}
 			{% block errors %}
