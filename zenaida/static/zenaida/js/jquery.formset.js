@@ -304,7 +304,12 @@
             // If this is a table, insert before the button row.
             row.insertBefore(buttonRow).show();
         } else {
-            this.current_rows().filter(':last').after(row)
+            var current_rows = this.current_rows();
+            if (current_rows.length > 0) {
+                current_rows.filter(':last').after(row);
+            } else {
+                this.$el.prepend(row);
+            }
         }
         this.insertDeleteLink(row);
         this.updateRowIndex(row, formCount);
