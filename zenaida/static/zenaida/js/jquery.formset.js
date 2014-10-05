@@ -31,6 +31,8 @@
 
     var Formset = function (el, options) {
         this.options = $.extend({}, Formset.DEFAULTS, options);
+        this.sortableOptions = $.extend({}, Formset.SORTABLE_DEFAULTS, options.sortableOptions);
+
         this.$el = $(el);
         this.totalForms = $('#id_' + options.prefix + '-TOTAL_FORMS');
         this.maxForms = $('#id_' + options.prefix + '-MAX_NUM_FORMS');
@@ -52,7 +54,13 @@
         keepFieldValues: '',             // jQuery selector for fields whose values should be kept when the form is cloned
         sortableHandle: null,            // jQuery selector for what part of each form row is draggable
         sortableField: null,             // Name of field which keeps track of order index
+        sortableOptions: null            // Options to be passed to jQuery UI's `.sortable()` method. Possible options documented here: http://api.jqueryui.com/sortable/
     };
+
+    Formset.SORTABLE_DEFAULTS = {
+        opacity: .5,
+        axis: "y"
+    }
 
     Formset.childElementSelector = 'input,select,textarea,label,div,a';
 
@@ -111,7 +119,7 @@
     Formset.prototype.initSortable = function () {
         var formset = this, // useful for subscope below
             options = this.options,
-            sortable_options = {opacity: .5, axis: "y"};
+            sortable_options = this.sortableOptions;
 
         if (!("sortable" in $.fn)) {
             // If jQuery UI sortable is not included, short-circuit:
@@ -119,10 +127,6 @@
             return;
         }
 
-        // If a row selector is specified, limit sortables to that selector:
-        if (options.rowSelector !== null) sortable_options.items = options.rowSelector;
-        // If a handle is specified:
-        if (options.sortableHandle !== null) sortable_options.handle = options.sortableHandle;
         // Add a callback for renumbering the fields:
         sortable_options.update = function (e, data) {
             formset.refreshRowOrderFields();
