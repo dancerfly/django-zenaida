@@ -8,5 +8,8 @@ class Dismissed(models.Model):
 
     """
 
-    key = models.CharField(max_length=255, unique=True)
+    key = models.CharField(max_length=255)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    class Meta:
+        unique_together = ('key', 'user',)
