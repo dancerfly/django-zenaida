@@ -105,21 +105,22 @@ And then enable it on your hint form using the ``data-dismiss-hint`` attribute:
         </div>
     {% endhint %}
 
-There are also a few additional data attributes available
+There are also a few additional data attributes available:
 
 ====================== ========= ===============================================
 Name                   Default   Description
 ====================== ========= ===============================================
-data-dismiss-hint      none      CSS selector that identified the element to be
+data-dismiss-hint      none      CSS selector that identifies the element to be
                                  hidden when the form is submitted.
 data-transition        "fadeOut" The transition to use for hiding the
                                  hint. Can be ``fadeOut``, ``slideUp``,
                                  or ``none``.
-data-transition-speed  200       How quickly to execute the transition in ms.
+data-transition-speed  200       How quickly to execute the transition in
+                                 milleseconds.
 ====================== ========= ===============================================
 
-The javascript requires jQuery, so be sure to include that on the page with your
-hints.
+The javascript relies on jQuery, so be sure to include that on the page
+with your hints.
 
 If for any reason the included javascript does not work with your templates, you
 can write your own javascript that submits the form data to
