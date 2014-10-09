@@ -1,3 +1,5 @@
+.. highlight:: python
+
 Zenaida Contrib Hints
 ========================
 
@@ -7,7 +9,9 @@ user-dismissable messages into your templates.
 Installation
 ------------
 
-You can install the latest version of Zenaida using ``pip``::
+You can install the latest version of Zenaida using ``pip``:
+
+.. code-block:: bash
 
     $ pip install https://github.com/littleweaver/django-zenaida/tarball/master
 
@@ -20,17 +24,17 @@ Setup
 
 Ensure that ``'zenaida.contrib.hints'`` is in your project's ``INSTALLED_APPS``::
 
-INSTALLED_APPS = (
-    'zenaida.contrib.hints',
-    ...
-)
+    INSTALLED_APPS = (
+        'zenaida.contrib.hints',
+        ...
+    )
 
 Add the following or similar anywhere in your URLconf::
 
-urlpatterns = patterns('',
-    url(r'^hints/', include('zenaida.contrib.hints.urls')),
-    ...
-)
+    urlpatterns = patterns('',
+        url(r'^hints/', include('zenaida.contrib.hints.urls')),
+        ...
+    )
 
 Usage
 -----
