@@ -107,14 +107,16 @@ And then enable it on your hint form using the ``data-dismiss-hint`` attribute:
 
 There are also a few additional data attributes available
 
+====================== ========= ===============================================
 Name                   Default   Description
 ====================== ========= ===============================================
 data-dismiss-hint      none      CSS selector that identified the element to be
                                  hidden when the form is submitted.
-data-transition       "fadeOut"  The transition to use for hiding the
+data-transition        "fadeOut" The transition to use for hiding the
                                  hint. Can be ``fadeOut``, ``slideUp``,
                                  or ``none``.
-data-transition-speed 200        How quickly to execute the transition in ms.
+data-transition-speed  200       How quickly to execute the transition in ms.
+====================== ========= ===============================================
 
 The javascript requires jQuery, so be sure to include that on the page with your
 hints.
