@@ -11,10 +11,8 @@ def dismiss(request):
     if not request.POST:
         return HttpResponseNotAllowed(['POST'])
     else:
-        form = DismissHintForm(request.POST)
-        dismissed = form.save(commit=False)
-        dismissed.user = request.user
-        dismissed.save()
+        form = DismissHintForm(request.POST, user=request.user)
+        dismissed = form.save()
         if 'next' in request.GET:
             next_url = request.GET['next']
         else:
