@@ -61,6 +61,11 @@ on keys of 255 characters) and must include one user. The
 :ttag:`{% dismissed %}` section is optional for rendering different HTML if the
 user has already dismissed this hint.
 
+You may also optionally include the ``immediate`` keyword as the last parameter
+of the template tag, e.g., ``{% hint user key1 key2 immediate %}``.
+If the ``immediate`` keyword is provided, the hint is displayed once,
+immediately marked for dismissal, and will not be displayed again.
+
 Within the :ttag:`{% hint %}` tag, some context variables are available:
 
 ========================== =============================================
@@ -127,3 +132,16 @@ can write your own javascript that submits the form data to
 ``{{ hint.dismiss_action }}``. As long as the ajax request includes the
 ``X-Requested-With: XMLHttpRequest`` header, the view will return a JSON success
 message or an error.
+
+Programmatic Dismissal
+----------------------
+
+You can also dismiss a hint in Python like so:
+
+.. code-block:: python
+
+    >>> from zenaida.contrib import hints
+    >>> hints.dismiss(user, [key1, key2])
+
+The first argument must be a user object and the second argument must be an
+iterable of keys (the same list that would be provided to the template tag).
