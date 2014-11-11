@@ -30,7 +30,7 @@
 
 		// If the element is already shorter than the specified number of lines,
 		// short-circuit.
-		if (this.$el.height() < shorten_height) return;
+		if (this.$el.height() <= shorten_height) return;
 
 		// Create more trigger.
 		this.$more = $(this.options.moreHtml.replace("{label}", this.options.moreText));
