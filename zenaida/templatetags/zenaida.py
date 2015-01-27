@@ -1,3 +1,4 @@
+# encoding: utf8
 from __future__ import absolute_import, division
 
 import datetime
@@ -13,6 +14,7 @@ register = template.Library()
 
 CURRENCY_TO_SYMBOL = {
     'USD': ('$', 'left'),
+    'GBP': ('£', 'left'),
 }
 
 
