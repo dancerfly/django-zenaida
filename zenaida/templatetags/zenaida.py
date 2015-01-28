@@ -1,5 +1,5 @@
 # encoding: utf8
-from __future__ import absolute_import, division
+from __future__ import absolute_import, division, unicode_literals
 
 import datetime
 import decimal
@@ -28,9 +28,9 @@ def format_money(amount, currency):
     amount = decimal.Decimal(amount).quantize(decimal.Decimal('0.01'))
     if currency in CURRENCY_TO_SYMBOL:
         symbol, side = CURRENCY_TO_SYMBOL[currency]
-        format = u'{symbol}{amount}' if side == 'left' else '{amount}{symbol}'
+        format = '{symbol}{amount}' if side == 'left' else '{amount}{symbol}'
         return format.format(symbol=symbol, amount=amount)
-    return u'{} {}'.format(amount, currency)
+    return '{} {}'.format(amount, currency)
 
 
 @register.filter
