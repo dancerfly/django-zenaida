@@ -12,8 +12,6 @@ def forward(apps, schema_editor):
     schema_editor.delete_model(TalkbackFeedbackItem)
     # Move the zenaida table into it's place:
     schema_editor.alter_db_table(ZenaidaFeedbackItem, "feedback_feedbackitem", "talkback_feedbackitem")
-    # Create an empty table for zenaida feedback in place:
-    schema_editor.delete_model(ZenaidaFeedbackItem)
 
 
 def backward(apps, schema_editor):
