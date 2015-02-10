@@ -29,5 +29,6 @@ setup(
     install_requires=[
         'django>=1.7',
         'django-floppyforms>=1.1.1',
+        'django-talkback>=0.0.1',
     ]
 )

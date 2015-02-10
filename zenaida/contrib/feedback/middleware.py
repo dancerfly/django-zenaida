@@ -17,32 +17,10 @@ class FeedbackMiddleware(object):
     """
 
     def process_response(self, request, response):
-        "Inject the feedback form into the response."
+        import logging
 
-        # If the view is in the ignored namespaces, short-circuit:
-        if (request.resolver_match is not None and
-                request.resolver_match.namespace in CONFIG['IGNORED_NAMESPACES']):
-            return response
+        logging.warning(
+            "Zenaida Feedback is deprecated and the form no longer renders."
+            "Please switch to django-talkback.",)
 
-        # Currently feedback can only be submitted when logged in.
-        if not hasattr(request, 'user') or not request.user.is_authenticated():
-            return response
-
-        # Check for responses where the feedback can't be inserted.
-        content_encoding = response.get('Content-Encoding', '')
-        content_type = response.get('Content-Type', '').split(';')[0]
-        if any((getattr(response, 'streaming', False),
-                'gzip' in content_encoding,
-                content_type not in _HTML_TYPES)):
-            return response
-
-        content = force_text(response.content, encoding=settings.DEFAULT_CHARSET)
-        insert_before = CONFIG['INSERT_BEFORE']
-        pattern = re.escape(insert_before)
-        bits = re.split(pattern, content, flags=re.IGNORECASE)
-        if len(bits) > 1:
-            bits[-2] += render_feedback_widget(request)
-            response.content = insert_before.join(bits)
-            if response.get('Content-Length', None):
-                response['Content-Length'] = len(response.content)
         return response
