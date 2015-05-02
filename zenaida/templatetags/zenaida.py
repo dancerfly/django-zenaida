@@ -7,6 +7,7 @@ import pytz
 
 from django import template
 from django.forms.widgets import CheckboxInput
+from django.utils import timezone
 
 
 register = template.Library()
@@ -51,12 +52,12 @@ def td_timeuntil(value, now=None):
     """
 
     if not now:
-        now = datetime.datetime.now(pytz.utc)
+        now = timezone.localtime(timezone.now())
 
     try:
         td = value - now
     except TypeError:
-        now = datetime.date.today()
+        now = now.date()
         td = value - now
 
     return td
